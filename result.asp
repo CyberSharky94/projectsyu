@@ -2,8 +2,7 @@
 
 <% 
 
-  
-
+  Server.ScriptTimeout = 200
 
   var q1 = Request.form("group1")
   var q2 = Request.form("group2")
@@ -89,10 +88,6 @@
     s3_no++
   if(q12 == "No")
     s3_no++
-
-
-  if(ans3 != false)
-      countTotAns++
 
 
   var q13 = Request.form("group13")
@@ -473,48 +468,66 @@
     s16_no++
 
 
+  var countTotAns = 0
+
+  var studyTechnique = s1_yes - s1_no 
+  var selfMotivation = s2_yes - s2_no 
+  var timeManagement = s3_yes - s3_no 
+  var completingHomeworks = s4_yes - s4_no 
+  var selfAdaptation = s5_yes - s5_no 
+  var studTeacher = s6_yes - s6_no 
+  var behaviour = s7_yes - s7_no 
+  var attention = s8_yes - s8_no 
+  var distraction = s9_yes - s9_no 
+  var getAlong = s10_yes - s10_no 
+  var sincerity = s11_yes - s11_no 
+  var teamwork = s12_yes - s12_no 
+  var emotional = s13_yes - s3_no 
+  var relationship = s14_yes - s14_no 
+  var adaptation = s15_yes - s15_no 
+  var selfBehaviour = s16_yes - s16_no
+
+  if(studyTechnique < 0)
+    countTotAns++
+  if(selfMotivation < 0)
+    countTotAns++
+  if(timeManagement < 0)
+    countTotAns++
+  if(completingHomeworks < 0)
+    countTotAns++
+  if(selfAdaptation < 0)
+    countTotAns++
+  if(studTeacher < 0)
+    countTotAns++
+  if(behaviour < 0)
+    countTotAns++
+  if(attention < 0)
+    countTotAns++
+  if(distraction < 0)
+    countTotAns++
+  if(getAlong < 0)
+    countTotAns++
+  if(sincerity < 0)
+    countTotAns++
+  if(teamwork < 0)
+    countTotAns++
+  if(emotional < 0)
+    countTotAns++
+  if(relationship < 0)
+    countTotAns++
+  if(adaptation < 0)
+    countTotAns++
+  if(selfBehaviour < 0)
+    countTotAns++
+
   var status1 = "You MAY Attend The Counselling Session"
   var status2 = "You Are RECOMMENDED to Attend The Counselling Session"
   var status3 = "You Are HIGHLY RECOMMENDED to Attend The Counselling Session"
-  var problem = ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10, ans11, ans12, ans13, ans14, ans15, ans16
-  var countTotAns = 0
-
-  if(problem == ans1)
-    countTotAns++
-  if(problem == ans2)
-    countTotAns++
-  if(problem == ans3)
-    countTotAns++
-  if(problem == ans4)
-    countTotAns++
-  if(problem == ans5)
-    countTotAns++
-  if(problem == ans6)
-    countTotAns++
-  if(problem == ans7)
-    countTotAns++
-  if(problem == ans8)
-    countTotAns++
-  if(problem == ans9)
-    countTotAns++
-  if(problem == ans10)
-    countTotAns++
-  if(problem == ans11)
-    countTotAns++
-  if(problem == ans12)
-    countTotAns++
-  if(problem == ans13)
-    countTotAns++
-  if(problem == ans14)
-    countTotAns++
-  if(problem == ans15)
-    countTotAns++
-  if(problem == ans16)
-    countTotAns
   
- 
 %>
 
+ 
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -558,18 +571,17 @@
       <div class="inside">
 
       <%
-        if(Request("hanter")=="Submit")
+        if(Request("hantar")=="Submit")
         {
 
-          var discprob = ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10, ans11, ans12, ans13, ans14, ans15, ans16
-          var discproblem = Request.QueryString.discprob("ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10, ans11, ans12, ans13, ans14, ans15, ans16");
-
+          var problems = ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10, ans11, ans12, ans13, ans14, ans15, ans16
+          var status = status1, status2, status3
 
           var DSN = "DSN=project";
           var Conn = Server.CreateObject("ADODB.Connection");
           Conn.Open(DSN);
 
-          sql = "INSERT INTO studentresult (discproblem) VALUES ('"+discproblem+"')";
+          sql = "INSERT INTO studentresult (discprob, status) VALUES ('"+problems+"','"+status+"')";
 
           Conn.Execute(sql);
           Conn.Close();
@@ -599,12 +611,127 @@
    <tr>
      <td colspan="2">
        <%
+
         if(s1_yes < s1_no)
           Response.write(ans1)
+          
        %>
-       <br><br>
+       <br>
+       <%
+        if(s2_yes < s2_no)
+          Response.write(ans2)
+          
+       %>
+       <br>
+       <%
+        if(s3_yes < s3_no)
+          Response.write(ans3)
+          
+       %>
+       <br>
+       <%
+        if(s4_yes < s4_no)
+          Response.write(ans4)
+          
+       %>
+       <br>
+       <%
+        if(s5_yes < s5_no)
+          Response.write(ans5)
+          
+       %>
+       <br>
+       <%
+        if(s6_yes < s6_no)
+          Response.write(ans6)
+          
+       %>
+       <br>
+       <%
+        if(s7_yes < s7_no)
+          Response.write(ans7)
+          
+       %>
+       <br>
+       <%
+        if(s8_yes < s8_no)
+          Response.write(ans8)
+          
+        %>
+       <br>
+       <%
+        if(s9_yes < s9_no)
+          Response.write(ans9)
+          
+       %>
+       <br>
+       <%
+        if(s10_yes < s10_no)
+          Response.write(ans10)
+          
+       %>
+       <br>
+       <%
+        if(s11_yes < s11_no)
+          Response.write(ans11)
+          
+       %>
+       <br>
+       <%
+        if(s12_yes < s12_no)
+          Response.write(ans12)
+          
+       %>
+       <br>
+       <%
+        if(s13_yes < s13_no)
+          Response.write(ans13)
+          
+       %>
+       <br>
+       <%
+        if(s14_yes < s14_no)
+          Response.write(ans14)
+          
+        %>
+        <br>
+        <%
+        if(s15_yes < s15_no)
+          Response.write(ans15)
+          
+        %>
+        <br>
+        <%
+        if(s16_yes < s16_no)
+          Response.write(ans16)
+          
+        %>
+        <br>
      </td>
     </tr>
+
+
+    <tr>
+     <th colspan="2">STATUS</th>
+     <br><br>
+   </tr>
+
+    <tr>
+     <td colspan="2">
+         <%
+
+          
+          if(countTotAns > 0 && countTotAns <=7)
+            Response.write(status1)
+          else if(countTotAns == 8)
+            Response.write(status2)
+          else if(countTotAns >=9 && countTotAns <=16)
+            Response.write(status3)
+         %>
+        <br><br>
+      </td>
+    </tr>
+  </table>
    <!--<tr>
     <th colspan="2">SECTION 2</th>
    </tr>
@@ -616,15 +743,7 @@
     <td>No</td>
     <td><%=(s2_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s2_yes < s2_no)
-          Response.write(ans2)
-       %>
-       <br><br>
-     </td>
-    </tr>
+   
 
 
     <!--<tr>
@@ -638,15 +757,7 @@
     <td>No</td>
     <td><%=(s3_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s3_yes < s3_no)
-          Response.write(ans3)
-       %>
-       <br><br>
-     </td>
-    </tr>
+   
 
     <!--<tr>
     <th colspan="2">SECTION 4</th>
@@ -659,16 +770,7 @@
     <td>No</td>
     <td><%=(s4_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s4_yes < s4_no)
-          Response.write(ans4)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
+   
 
      <!--<tr>
     <th colspan="2">SECTION 5</th>
@@ -681,16 +783,7 @@
     <td>No</td>
     <td><%=(s5_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s5_yes < s5_no)
-          Response.write(ans5)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
+   
 
      <!--<tr>
     <th colspan="2">SECTION 6</th>
@@ -703,16 +796,7 @@
     <td>No</td>
     <td><%=(s6_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s6_yes < s6_no)
-          Response.write(ans6)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
+   
 
     <!--<tr>
     <th colspan="2">SECTION 7</th>
@@ -725,17 +809,7 @@
     <td>No</td>
     <td><%=(s7_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s7_yes < s7_no)
-          Response.write(ans7)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
-
+   
     <!--<tr>
     <th colspan="2">SECTION 8</th>
    </tr>
@@ -747,16 +821,6 @@
     <td>No</td>
     <td><%=(s8_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s8_yes < s8_no)
-          Response.write(ans8)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
 
     <!--<tr>
     <th colspan="2">SECTION 9</th>
@@ -769,16 +833,7 @@
     <td>No</td>
     <td><%=(s9_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s9_yes < s9_no)
-          Response.write(ans9)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
+  
 
     <!--<tr>
     <th colspan="2">SECTION 10</th>
@@ -791,16 +846,7 @@
     <td>No</td>
     <td><%=(s10_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s10_yes < s10_no)
-          Response.write(ans10)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
+  
 
     <!--<tr>
     <th colspan="2">SECTION 11</th>
@@ -813,16 +859,7 @@
     <td>No</td>
     <td><%=(s11_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s11_yes < s11_no)
-          Response.write(ans11)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
+   
 
     <!--<tr>
     <th colspan="2">SECTION 12</th>
@@ -835,16 +872,7 @@
     <td>No</td>
     <td><%=(s12_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s12_yes < s12_no)
-          Response.write(ans12)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
+   
 
     <!--<tr>
     <th colspan="2">SECTION 13</th>
@@ -857,16 +885,7 @@
     <td>No</td>
     <td><%=(s13_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s13_yes < s13_no)
-          Response.write(ans13)
-       %>
-       <br><br>
-     </td>
-    </tr>
-
+   
 
     <!--<tr>
     <th colspan="2">SECTION 14</th>
@@ -879,16 +898,7 @@
     <td>No</td>
     <td><%=(s14_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s14_yes < s14_no)
-          Response.write(ans14)
-        %>
-        <br><br>
-      </td>
-    </tr>
-
+   
 
     <!--<tr>
     <th colspan="2">SECTION 15</th>
@@ -901,16 +911,7 @@
     <td>No</td>
     <td><%=(s15_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s15_yes < s15_no)
-          Response.write(ans15)
-        %>
-        <br><br>
-      </td>
-    </tr>
-
+   
 
     <!--<tr>
     <th colspan="2">SECTION 16</th>
@@ -923,36 +924,8 @@
     <td>No</td>
     <td><%=(s16_no) %></td>
    </tr>-->
-   <tr>
-     <td colspan="2">
-       <%
-        if(s16_yes < s16_no)
-          Response.write(ans16)
-        %>
-        <br>
-      </td>
-    </tr>
+   
 
-    <tr>
-     <th colspan="2">STATUS</th>
-     <br><br>
-   </tr>
-
-    <tr>
-     <td colspan="2">
-         <%
-          if(countTotAns > 8 && countTotAns <= 16)
-            Response.write(status3)
-          if(countTotAns == 8)
-            Response.write(status2)
-          if(countTotAns > 0 && countTotAns < 8)
-            Response.write(status1)
-
-         %>
-        <br><br>
-      </td>
-    </tr>
-  </table>
 		
 
 </div>

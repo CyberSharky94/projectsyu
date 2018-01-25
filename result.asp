@@ -574,8 +574,8 @@
         if(Request("hantar")=="Submit")
         {
 
-          var problems = ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10, ans11, ans12, ans13, ans14, ans15, ans16
-          var status = status1, status2, status3
+          var problems = ans1+ "," +ans2+ "," +ans3+ "," +ans4+ "," +ans5+ "," +ans6+ "," +ans7+ "," +ans8+ "," +ans9+ "," +ans10+ "," +ans11+ "," +ans12+ "," +ans13+ "," +ans14+ "," +ans15+ "," +ans16
+          var status = status1+ "," +status2+ "," +status3
 
           var DSN = "DSN=project";
           var Conn = Server.CreateObject("ADODB.Connection");
